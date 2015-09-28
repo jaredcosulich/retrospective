@@ -1,0 +1,33 @@
+<%= form_for(@board) do |f| %>
+  <% if @board.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@board.errors.count, "error") %> prohibited this board from being saved:</h2>
+
+      <ul>
+      <% @board.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :good_column_name %><br>
+    <%= f.text_field :good_column_name %>
+  </div>
+  <div class="field">
+    <%= f.label :bad_column_name %><br>
+    <%= f.text_field :bad_column_name %>
+  </div>
+  <div class="field">
+    <%= f.label :meh_column_name %><br>
+    <%= f.text_field :meh_column_name %>
+  </div>
+  <div class="field">
+    <%= f.label :close_date %><br>
+    <%= f.time_select :close_date %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

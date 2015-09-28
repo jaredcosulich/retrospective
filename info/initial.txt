@@ -1,0 +1,59 @@
+- Create a retrospective
+- Set a closing time
+- Shareable link
+- Password
+
+
+User comes
+- enters password
+- enters name
+- enters email?
+
+Can add something to each column
+- can vote up each thing
+- can comment on each thing
+
+
+
+Board
+  - close_date/time
+  - good_column_name
+  - meh_column_name
+  - bad_column_name
+  
+  
+Item
+  - description
+  - column
+  - board.id
+  - user.id
+  
+Comment
+  - comment
+  - item.id
+  - user.id
+  
+Vote
+  - item.id
+  - user.id
+
+User
+- name
+- email
+
+
+rails new retrospective
+cd retrospective
+** copy gemfile from 10expectations **
+bundle
+
+rails g scaffold board good_column_name:string bad_column_name:string meh_column_name:string close_date:time  --force
+rails g scaffold item description:string column_name:string board_id:integer user_id:integer  --force
+rails g scaffold comment comment:string item_id:integer user_id:integer  --force
+rails g scaffold vote item_id:integer user_id:integer  --force
+rails g scaffold user name:string email:string  --force
+
+
+
+
+
