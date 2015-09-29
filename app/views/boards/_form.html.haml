@@ -1,0 +1,27 @@
+= form_for(@board) do |f|
+  - if @board.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@board.errors.count, "error")
+        prohibited this board from being saved:
+      %ul
+        - @board.errors.full_messages.each do |message|
+          %li= message
+  .field.buffer
+    = f.label :good_column_name
+    %br
+      = f.text_field :good_column_name
+  .field.buffer.twice
+    = f.label :meh_column_name
+    %br
+      = f.text_field :meh_column_name
+  .field.buffer.twice
+    = f.label :bad_column_name
+    %br
+      = f.text_field :bad_column_name
+  .field.buffer.twice
+    = f.label :close_at
+    %br
+      = f.datetime_select :close_at
+  .actions.buffer.thrice
+    = f.submit

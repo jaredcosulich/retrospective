@@ -12,7 +12,7 @@ class BoardsControllerTest < ActionController::TestCase
 
   test "should create board" do
     assert_difference('Board.count') do
-      post :create, board: { bad_column_name: @board.bad_column_name, close_date: @board.close_date, good_column_name: @board.good_column_name, meh_column_name: @board.meh_column_name }
+      post :create, board: { name: @board.name, bad_column_name: @board.bad_column_name, close_at: @board.close_at, good_column_name: @board.good_column_name, meh_column_name: @board.meh_column_name }
     end
 
     assert_redirected_to board_path(assigns(:board))
@@ -29,7 +29,7 @@ class BoardsControllerTest < ActionController::TestCase
   end
 
   test "should update board" do
-    patch :update, id: @board, board: { bad_column_name: @board.bad_column_name, close_date: @board.close_date, good_column_name: @board.good_column_name, meh_column_name: @board.meh_column_name }
+    patch :update, id: @board, board: { name: @board.name, bad_column_name: @board.bad_column_name, close_at: @board.close_at, good_column_name: @board.good_column_name, meh_column_name: @board.meh_column_name }
     assert_redirected_to board_path(assigns(:board))
   end
 

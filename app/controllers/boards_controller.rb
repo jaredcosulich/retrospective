@@ -14,7 +14,7 @@ class BoardsController < ApplicationController
 
   # GET /boards/new
   def new
-    @board = Board.new
+    @board = Board.new(good_column_name: 'Good', bad_column_name: 'Bad', meh_column_name: 'Meh')
   end
 
   # GET /boards/1/edit
@@ -69,6 +69,6 @@ class BoardsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def board_params
-      params.require(:board).permit(:good_column_name, :bad_column_name, :meh_column_name, :close_date)
+      params.require(:board).permit(:good_column_name, :bad_column_name, :meh_column_name, :close_at)
     end
 end

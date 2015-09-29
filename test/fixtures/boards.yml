@@ -1,13 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 board_one:
+  name: Board One
   good_column_name: MyString
   bad_column_name: MyString
   meh_column_name: MyString
-  close_date: 2015-09-28 18:46:12
+  close_at: 2015-09-28 18:46:12
 
 board_two:
+  name: Board Two
   good_column_name: MyString
   bad_column_name: MyString
   meh_column_name: MyString
-  close_date: 2015-09-28 18:46:12
+  close_at: 2015-09-28 18:46:12

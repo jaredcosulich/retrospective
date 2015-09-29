@@ -1,0 +1,19 @@
+!!!
+%html
+  %head
+    %title Retrospective
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    %link{href: 'https://fonts.googleapis.com/css?family=Josefin+Sans:400,600', rel: 'stylesheet', type: 'text/css'}
+    -#%link{href: 'https://fonts.googleapis.com/css?family=Cabin:400,700', rel: 'stylesheet', type: 'text/css'}
+    
+    
+    = csrf_meta_tags
+  %body.fonted.container
+    .row
+      .col-s12.center
+        %h1 Retrospective.io
+        
+    .row.buffer.thrice
+      .col-s12
+        = yield
