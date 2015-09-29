@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+comment_one:
   comment: MyString
-  item_id: 1
+  item: item_one
   user_id: 1
 
-two:
+comment_two:
   comment: MyString
-  item_id: 1
+  item: item_one
   user_id: 1

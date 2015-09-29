@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+item_one:
   description: MyString
   column_name: MyString
-  board_id: 1
+  board: board_one
   user_id: 1
 
-two:
+item_two:
   description: MyString
   column_name: MyString
-  board_id: 1
+  board: board_one
   user_id: 1

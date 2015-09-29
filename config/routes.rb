@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  resources :boards
-  resources :users
-  resources :votes
-  resources :comments
-  resources :items
-  resources :boards
-  
+  resources :boards do
+    resources :items do
+      resources :comments
+      resources :votes
+    end
+  end
+  resources :users  
 
   root 'welcome#index'
   

@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :set_board
+  before_action :set_item
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
   # GET /comments
@@ -56,19 +58,29 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
+      format.html { redirect_to @board, notice: 'Comment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_board
+      @board = Board.find(params[:board_id])
+    end
+
+    # Use callbacks to share common setup or constraints between actions.
+    def set_item
+      @item = @board.items.find(params[:item_id])
+    end
+
+    # Use callbacks to share common setup or constraints between actions.
     def set_comment
-      @comment = Comment.find(params[:id])
+      @comment = @item.comments.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.require(:comment).permit(:comment, :item_id, :user_id)
+      params.require(:comment).permit(:comment, :user_id)
     end
 end

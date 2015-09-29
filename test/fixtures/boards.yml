@@ -1,12 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+board_one:
   good_column_name: MyString
   bad_column_name: MyString
   meh_column_name: MyString
   close_date: 2015-09-28 18:46:12
 
-two:
+board_two:
   good_column_name: MyString
   bad_column_name: MyString
   meh_column_name: MyString
