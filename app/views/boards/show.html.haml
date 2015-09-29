@@ -13,5 +13,7 @@
       .row
         .col-sm-12    
           - @board.items.for_column(column_name).each do |item|
-            .item
-              = item.title
+            .row
+              .col-sm-12.buffer.twice   
+                .item
+                  = item.title
