@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
 
   # GET /comments/new
   def new
-    @comment = Comment.new
+    @comment = @item.comments.new
   end
 
   # GET /comments/1/edit
@@ -26,7 +26,7 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @comment = Comment.new(comment_params)
+    @comment = @item.comments.new(comment_params)
 
     respond_to do |format|
       if @comment.save
