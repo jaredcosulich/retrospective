@@ -1,0 +1,17 @@
+.row
+  - ['good', 'meh', 'bad'].each do |column_grouping|
+    - column_name = @board["#{column_grouping}_column_name"]
+    
+    .column.col-sm-12.col-md-4
+      .row
+        .col-sm-12
+          %h4.title= column_name
+    
+      .row.buffer
+        .col-sm-12.center
+          = link_to('Add Item', new_board_item_path(@board, column_name: column_name), class: 'btn btn-default')
+      .row
+        .col-sm-12    
+          - @board.items.for_column(column_name).each do |item|
+            .item
+              = item.title

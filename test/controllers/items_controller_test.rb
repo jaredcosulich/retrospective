@@ -8,14 +8,24 @@ class ItemsControllerTest < ActionController::TestCase
 
 
   test "should get new" do
-    get :new, board_id: @board.id
+    get :new, board_id: @board.id, column_name: 'Good'
     assert_response :success
   end
 
   test "should create item" do
     assert_difference('Item.count') do
-      post :create, board_id: @board.id, item: { column_name: @item.column_name, description: @item.description, user_id: @item.user_id }
+      post :create, board_id: @board.id, item: { column_name: 'Good', title: 'Title', user_id: 1 }
     end
+    
+    @board.reload
+    
+    assert_equal(3, @board.items.length)
+    
+    item = @board.items.last
+    
+    assert_equal('Title', item.title)
+    assert_equal('Good', item.column_name)
+    assert_equal(1, item.user_id)
 
     assert_redirected_to @board
   end
@@ -31,7 +41,7 @@ class ItemsControllerTest < ActionController::TestCase
   end
 
   test "should update item" do
-    patch :update, id: @item, board_id: @board.id, item: { column_name: @item.column_name, description: @item.description, user_id: @item.user_id }
+    patch :update, id: @item, board_id: @board.id, item: { column_name: @item.column_name, title: @item.title, user_id: @item.user_id }
     assert_redirected_to @board
   end
 

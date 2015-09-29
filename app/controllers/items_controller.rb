@@ -9,7 +9,7 @@ class ItemsController < ApplicationController
 
   # GET /items/new
   def new
-    @item = Item.new
+    @item = @board.items.new(column_name: params[:column_name])
   end
 
   # GET /items/1/edit
@@ -19,7 +19,7 @@ class ItemsController < ApplicationController
   # POST /items
   # POST /items.json
   def create
-    @item = Item.new(item_params)
+    @item = @board.items.new(item_params)
 
     respond_to do |format|
       if @item.save
@@ -69,6 +69,6 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:description, :column_name, :board_id, :user_id)
+      params.require(:item).permit(:title, :column_name, :user_id)
     end
 end

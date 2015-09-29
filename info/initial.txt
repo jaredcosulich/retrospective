@@ -16,7 +16,7 @@ Can add something to each column
 
 
 Board
-  - close_date/time
+  - col-sm-m/time
   - good_column_name
   - meh_column_name
   - bad_column_name
@@ -47,7 +47,7 @@ cd retrospective
 ** copy gemfile from 10expectations **
 bundle
 
-rails g scaffold board good_column_name:string bad_column_name:string meh_column_name:string close_date:time  --force
+rails g scaffold board good_column_name:string bad_column_name:string meh_column_name:string col-sm-m:time  --force
 rails g scaffold item description:string column_name:string board_id:integer user_id:integer  --force
 rails g scaffold comment comment:string item_id:integer user_id:integer  --force
 rails g scaffold vote item_id:integer user_id:integer  --force

@@ -1,27 +1,17 @@
-= form_for(board_items_path(@board, @item)) do |f|
-  - if @item.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@item.errors.count, "error")
-        prohibited this item from being saved:
-      %ul
-        - @item.errors.full_messages.each do |message|
-          %li= message
-  .field
-    = f.label :description
-    %br
-      = f.text_field :description
-  .field
-    = f.label :column_name
-    %br
-      = f.text_field :column_name
-  .field
-    = f.label :board_id
-    %br
-      = f.number_field :board_id
-  .field
-    = f.label :user_id
-    %br
-      = f.number_field :user_id
-  .actions
-    = f.submit
+.row.buffer.thrice 
+  .col-sm-12.center
+    = form_for([@board, @item]) do |f|
+      - if @item.errors.any?
+        #error_explanation
+          %h2
+            = pluralize(@item.errors.count, "error")
+            prohibited this item from being saved:
+          %ul
+            - @item.errors.full_messages.each do |message|
+              %li= message
+      .field
+        = f.label :title
+        %br
+          = f.text_field :title
+      .actions.buffer.thrice
+        = f.submit 'Save', class: 'btn btn-default'
