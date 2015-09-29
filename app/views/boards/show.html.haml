@@ -16,4 +16,17 @@
             .row
               .col-sm-12.buffer.twice   
                 .item
-                  = item.title
+                  %p= item.title
+                  .row.small.center
+                    .col-sm-6                  
+                      = link_to_if(item.comments.length > 0, pluralize(item.comments.length, 'Comment'), '')
+                      &nbsp;
+                      |
+                      &nbsp;
+                      = link_to('Add', new_board_item_comment_path(@board, item))
+                    .col-sm-6                  
+                      = pluralize(item.votes.length, 'vote')                      
+                      &nbsp;
+                      |
+                      &nbsp;
+                      = link_to('Vote Up', new_board_item_vote_path(@board, item))
