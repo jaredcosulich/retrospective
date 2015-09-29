@@ -1,0 +1,16 @@
+%p#notice= notice
+%p
+  %strong Description:
+  = @item.description
+%p
+  %strong Column name:
+  = @item.column_name
+%p
+  %strong Board:
+  = @item.board_id
+%p
+  %strong User:
+  = @item.user_id
+= link_to 'Edit', edit_board_item_path(@board, @item)
+|
+\#{link_to 'Back', @board}
