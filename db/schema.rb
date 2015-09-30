@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150929171929) do
+ActiveRecord::Schema.define(version: 20150930212753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,7 +24,11 @@ ActiveRecord::Schema.define(version: 20150929171929) do
     t.datetime "updated_at",       null: false
     t.datetime "close_at"
     t.string   "name"
+    t.string   "password"
+    t.string   "slug"
   end
+
+  add_index "boards", ["slug"], name: "index_boards_on_slug", using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.string   "comment"
@@ -32,7 +36,10 @@ ActiveRecord::Schema.define(version: 20150929171929) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "slug"
   end
+
+  add_index "comments", ["slug"], name: "index_comments_on_slug", using: :btree
 
   create_table "items", force: :cascade do |t|
     t.string   "column_name"
@@ -41,7 +48,10 @@ ActiveRecord::Schema.define(version: 20150929171929) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "title"
+    t.string   "slug"
   end
+
+  add_index "items", ["slug"], name: "index_items_on_slug", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -55,6 +65,9 @@ ActiveRecord::Schema.define(version: 20150929171929) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "slug"
   end
+
+  add_index "votes", ["slug"], name: "index_votes_on_slug", using: :btree
 
 end

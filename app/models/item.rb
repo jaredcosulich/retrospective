@@ -1,4 +1,5 @@
 require 'user_namable'
+require 'sluggable'
 
 class Item < ActiveRecord::Base
   belongs_to :board
@@ -11,7 +12,12 @@ class Item < ActiveRecord::Base
 
   include UserNamable  
   before_create :set_user
+
+  extend FriendlyId  
+  friendly_id :slug, use: :slugged
   
+  include Sluggable  
+  after_create :generate_slug
   
   def votes_list
     votes.map(&:user).compact.map(&:name).compact.join(', ')

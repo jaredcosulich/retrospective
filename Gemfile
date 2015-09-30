@@ -43,3 +43,4 @@ gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) support
 gem "twitter-bootstrap-rails"
 
 gem 'jquery-ui-rails'
+gem 'friendly_id', '~> 5.0.0'
