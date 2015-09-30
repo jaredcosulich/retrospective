@@ -1,3 +1,7 @@
+.row.buffer
+  .col-sm-12.center
+    %h2= @board.name
+
 .row.buffer.thrice
   - ['good', 'meh', 'bad'].each do |column_grouping|
     - column_name = @board["#{column_grouping}_column_name"]

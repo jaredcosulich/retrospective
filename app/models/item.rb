@@ -13,7 +13,7 @@ class Item < ActiveRecord::Base
   
   
   def votes_list
-    votes.map(&:user).map(&:name).compact.join(', ')
+    votes.map(&:user).compact.map(&:name).compact.join(', ')
   end
 
 end
