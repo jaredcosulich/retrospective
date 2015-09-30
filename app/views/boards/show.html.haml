@@ -2,28 +2,28 @@
   - ['good', 'meh', 'bad'].each do |column_grouping|
     - column_name = @board["#{column_grouping}_column_name"]
     
-    .column.col-sm-12.col-md-4
+    .column.col-sm-12.col-md-4{class: column_grouping}
       .row
         .col-sm-12
           %h4.title= column_name
     
       .row.buffer
         .col-sm-12.center
-          = link_to('Add Item', new_board_item_path(@board, column_name: column_name), class: 'btn btn-default')
+          = link_to('Add Item', new_board_item_path(@board, column_name: column_name), class: "btn btn-default #{column_grouping}-grad")
       .row
         .col-sm-12    
           - @board.items.for_column(column_name).each do |item|
             .row
               .col-sm-12.buffer.twice   
-                .item
-                  %p= item.title
+                .item{class: "#{column_grouping}-grad"}
+                  %p.center= item.title
                   .row.small.center
-                    .col-sm-6                  
-                      = link_to_if(item.comments.length > 0, pluralize(item.comments.length, 'Comment'), '')
-                      &nbsp;
-                      |
-                      &nbsp;
-                      = link_to('Add', new_board_item_comment_path(@board, item))
+                    .col-sm-6     
+                      - if item.comments.length > 0
+                        = link_to('Add A Comment', new_board_item_comment_path(@board, item))
+                      - else                           
+                        = link_to(pluralize(item.comments.length, 'Comment'), board_item_comments_path(@board, item))
+                      
                     .col-sm-6                  
                       = pluralize(item.votes.length, 'vote')                      
                       &nbsp;
