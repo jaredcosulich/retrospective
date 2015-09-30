@@ -10,5 +10,8 @@
 
 .row.buffer.twice
   .col-sm-12.col-md-offset-4.col-md-4
+    - if @comments.empty?
+      %p.center.buffer.thrice There are no comments for this item yet.
+    
     = render @comments
       
