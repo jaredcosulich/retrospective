@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
 
   # GET /items/new
   def new
-    @item = @board.items.new(column_name: params[:column_name])
+    @item = @board.items.new(column_name: params[:column_name], user_name: cookies.signed[:last_user_name])
   end
 
   # GET /items/1/edit
@@ -21,6 +21,8 @@ class ItemsController < ApplicationController
   # POST /items
   # POST /items.json
   def create
+    cookies.signed[:last_user_name] = item_params[:user_name]
+    
     @item = @board.items.new(item_params)
 
     respond_to do |format|

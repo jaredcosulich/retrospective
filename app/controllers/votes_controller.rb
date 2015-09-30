@@ -4,7 +4,7 @@ class VotesController < ApplicationController
   before_action :set_vote, only: [:destroy]
 
   def new
-    @vote = @item.votes.new
+    @vote = @item.votes.new(user_name: cookies.signed[:last_user_name])
   end
   
   def index
@@ -14,6 +14,8 @@ class VotesController < ApplicationController
   # POST /votes
   # POST /votes.json
   def create
+    cookies.signed[:last_user_name] = vote_params[:user_name]
+    
     @vote = @item.votes.new(vote_params)
 
     respond_to do |format|

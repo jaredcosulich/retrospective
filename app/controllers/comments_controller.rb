@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
 
   # GET /comments/new
   def new
-    @comment = @item.comments.new
+    @comment = @item.comments.new(user_name: cookies.signed[:last_user_name])
   end
 
   # GET /comments/1/edit
@@ -26,6 +26,8 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
+    cookies.signed[:last_user_name] = comment_params[:user_name]
+    
     @comment = @item.comments.new(comment_params)
 
     respond_to do |format|

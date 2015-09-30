@@ -16,7 +16,7 @@
           = link_to('Add Item', new_board_item_path(@board, column_name: column_name), class: "btn btn-default #{column_grouping}-grad")
       .row
         .col-sm-12    
-          - @board.items.for_column(column_name).each do |item|
+          - @board.items.recent.for_column(column_name).each do |item|
             .row
               .col-sm-12.buffer.twice   
                 .item{class: "#{column_grouping}-grad"}

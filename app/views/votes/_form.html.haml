@@ -9,10 +9,12 @@
           %ul
             - @vote.errors.full_messages.each do |message|
               %li= message
+              
       .field
         = f.label :user_name, 'Your Name'
         .wide-text
-          = f.text_field :user_name
+          = f.text_field :user_name, autofocus: true, class: 'autocomplete', data: {autocomplete: @board.names}
+
       .actions.buffer.thrice
         = f.submit 'Save', class: 'btn btn-default'
         &nbsp; &nbsp;

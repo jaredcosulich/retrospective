@@ -3,7 +3,7 @@ module UserNamable
         
   private
   
-  def set_user
+  def set_user    
     u = User.find_by_name(user_name)
     
     u = User.create(name: user_name) if u.nil?

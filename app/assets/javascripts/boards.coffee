@@ -18,8 +18,9 @@ ready = ->
   $('.autocomplete').each (index, field) ->
     do ->
       field = $(field)
+      field.onfocus(field.select())
       list = field.data('autocomplete')
-      field.autocomplete(source: list)
+      field.autocomplete(delay: 10, source: list)
     
 $(document).ready(ready)
 $(document).on('page:load', ready)
