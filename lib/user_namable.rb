@@ -1,6 +1,6 @@
 module UserNamable
   attr_accessor :user_name
-    
+        
   private
   
   def set_user

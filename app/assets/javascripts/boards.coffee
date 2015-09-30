@@ -2,6 +2,10 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
   
+initAutoComplete: (field) ->
+  field = $(field)  
+  console.log(field.data('autocomplete'))
+  
 ready = ->
   columns = $('.column')
   maxHeight = 0
@@ -10,6 +14,12 @@ ready = ->
     maxHeight = height if maxHeight < height
   
   columns.height(maxHeight)
+  
+  $('.autocomplete').each (index, field) ->
+    do ->
+      field = $(field)
+      list = field.data('autocomplete')
+      field.autocomplete(source: list)
     
 $(document).ready(ready)
 $(document).on('page:load', ready)
