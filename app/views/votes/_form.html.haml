@@ -1,22 +1,17 @@
 .row.buffer.thrice 
   .col-sm-12.center
-    = form_for([@board, @item, @comment]) do |f|
-      - if @comment.errors.any?
+    = form_for([@board, @item, @vote]) do |f|
+      - if @vote.errors.any?
         #error_explanation
           %h2
-            = pluralize(@comment.errors.count, "error")
+            = pluralize(@vote.errors.count, "error")
             prohibited this comment from being saved:
           %ul
-            - @comment.errors.full_messages.each do |message|
+            - @vote.errors.full_messages.each do |message|
               %li= message
-
       .field
         = f.label :user_name, 'Your Name'
         %br
           = f.text_field :user_name
-      .field
-        = f.label :comment
-        %br
-          = f.text_field :comment
       .actions.buffer.thrice
         = f.submit

@@ -9,8 +9,28 @@ class VotesControllerTest < ActionController::TestCase
 
   test "should create vote" do
     assert_difference('Vote.count') do
-      post :create, board_id: @board, item_id: @item, vote: { user_id: @vote.user_id }
+      post :create, board_id: @board, item_id: @item, vote: { user_name: 'John Doe' }
     end
+    
+    assert_equal(3, User.count)
+    
+    assert_equal(3, @item.votes.count)
+    
+    vote = @item.votes.last
+    
+    assert_equal('John Doe', vote.user.name)
+
+    assert_difference('Vote.count') do
+      post :create, board_id: @board, item_id: @item, vote: { user_name: 'John Doe' }
+    end
+
+    assert_equal(3, User.count)
+    
+    assert_equal(4, @item.votes.count)
+    
+    vote = @item.votes.last
+    
+    assert_equal('John Doe', vote.user.name)
 
     assert_redirected_to @board
   end

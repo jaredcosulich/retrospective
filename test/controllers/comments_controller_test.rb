@@ -14,14 +14,14 @@ class CommentsControllerTest < ActionController::TestCase
 
   test "should create comment" do
     assert_difference('Comment.count') do
-      post :create, board_id: @board.id, item_id: @item.id, comment: { comment: 'Comment!', user_id: 3 }
+      post :create, board_id: @board.id, item_id: @item.id, comment: { comment: 'Comment!', user_name: 'Alice Smith' }
     end
     
     assert_equal(3, @item.comments.length)
     
     comment = @item.comments.last
     assert_equal('Comment!', comment.comment)
-    assert_equal(3, comment.user_id)
+    assert_equal('Alice Smith', comment.user.name)
 
     assert_redirected_to @board
   end

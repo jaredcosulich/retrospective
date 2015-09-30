@@ -14,7 +14,7 @@ class ItemsControllerTest < ActionController::TestCase
 
   test "should create item" do
     assert_difference('Item.count') do
-      post :create, board_id: @board.id, item: { column_name: 'Good', title: 'Title', user_id: 1 }
+      post :create, board_id: @board.id, item: { column_name: 'Good', title: 'Title', user_name: 'Janice Htims' }
     end
     
     @board.reload
@@ -25,7 +25,7 @@ class ItemsControllerTest < ActionController::TestCase
     
     assert_equal('Title', item.title)
     assert_equal('Good', item.column_name)
-    assert_equal(1, item.user_id)
+    assert_equal('Janice Htims', item.user.name)
 
     assert_redirected_to @board
   end

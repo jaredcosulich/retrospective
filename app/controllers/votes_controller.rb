@@ -3,10 +3,18 @@ class VotesController < ApplicationController
   before_action :set_item
   before_action :set_vote, only: [:destroy]
 
+  def new
+    @vote = @item.votes.new
+  end
+  
+  def index
+    @votes = @item.votes.recent
+  end
+  
   # POST /votes
   # POST /votes.json
   def create
-    @vote = Vote.new(vote_params)
+    @vote = @item.votes.new(vote_params)
 
     respond_to do |format|
       if @vote.save
@@ -47,6 +55,6 @@ class VotesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def vote_params
-      params.require(:vote).permit(:item_id, :user_id)
+      params.require(:vote).permit(:user_name)
     end
 end
