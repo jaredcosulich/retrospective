@@ -1,16 +1,40 @@
 %p#notice= notice
-%p
-  %strong Title:
-  = @item.title
-%p
-  %strong Column name:
-  = @item.column_name
-%p
-  %strong Board:
-  = @item.board_id
-%p
-  %strong User:
-  = @item.user_id
-= link_to 'Edit', edit_board_item_path(@board, @item)
-|
-\#{link_to 'Back', @board}
+
+.row
+  .col-sm-12.center
+    %h2= link_to(@board.name, @board)
+
+.row
+  .col-sm-12.center
+    %h3= @item.title
+    %p 
+      From The
+      = @item.column_name.capitalize
+      Column 
+    %p
+      = link_to 'Edit', edit_board_item_path(@board, @item)
+      &nbsp; &nbsp; | &nbsp; &nbsp;
+      = link_to 'Delete', board_item_path(@board, @item), method: :delete, data: {confirm: 'Are you sure you want to delete this item?'}
+      
+.row.buffer
+  .col-sm-12.col-md-6.center 
+    .row.buffer
+      .col-sm-12.center
+        = link_to('Add A Comment', new_board_item_comment_path(@board, @item), class: 'btn btn-default')
+
+    .row
+      .col-sm-12.col-md-offset-1.col-md-10
+        = render @comments
+        
+
+  .col-sm-12.col-md-6.center    
+    .row.buffer.col-sm-12
+      = link_to('Vote Up This Item', new_board_item_vote_path(@board, @item), class: 'btn btn-default')
+
+    .row.buffer.twice
+      .col-sm-12.col-md-offset-1.col-md-10
+        - if @votes.empty?
+          %p.center There are no up votes for this item yet.
+    
+        = render @votes
+          

@@ -12,8 +12,5 @@
     - if @votes.empty?
       %p.center There are no up votes for this item yet.
     
-    - @votes.each do |vote|
-      .vote
-        .float-right= link_to('Delete', board_item_vote_path(@board, @item, vote), method: :delete, data: {confirm: 'Are you sure you want to delete this vote?'})
-        = vote.user.name
+    = render @votes
           

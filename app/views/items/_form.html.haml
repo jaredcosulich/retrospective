@@ -9,11 +9,17 @@
           %ul
             - @item.errors.full_messages.each do |message|
               %li= message
+      
       .field
         = f.label :title
         %br
           = f.text_field :title
           = f.hidden_field :column_name
-            
+      
+      .field.buffer.twice
+        = f.label :user_name, 'Added By (Your Name)'
+        %br
+          = f.text_field :user_name
+      
       .actions.buffer.thrice
         = f.submit 'Save', class: 'btn btn-default'

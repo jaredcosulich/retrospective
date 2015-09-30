@@ -5,6 +5,8 @@ class ItemsController < ApplicationController
   # GET /items/1
   # GET /items/1.json
   def show
+    @comments = @item.comments.recent
+    @votes = @item.votes.recent
   end
 
   # GET /items/new

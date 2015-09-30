@@ -10,9 +10,5 @@
 
 .row.buffer.twice
   .col-sm-12.col-md-offset-4.col-md-4
-    - @comments.each do |comment|
-      .comment
-        %p= comment.comment 
-        .right.small
-          User
-          
+    = render @comments
+      

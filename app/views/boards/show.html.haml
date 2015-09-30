@@ -1,4 +1,4 @@
-.row
+.row.buffer.thrice
   - ['good', 'meh', 'bad'].each do |column_grouping|
     - column_name = @board["#{column_grouping}_column_name"]
     
@@ -16,11 +16,11 @@
             .row
               .col-sm-12.buffer.twice   
                 .item{class: "#{column_grouping}-grad"}
-                  %p.center= item.title
+                  %p.center= link_to(item.title, board_item_path(@board, item))
                   .row.small.center
                     .col-sm-4    
-                      - if item.comments.length > 0
-                        = link_to('Add A Comment', new_board_item_comment_path(@board, item))
+                      - if item.comments.length <= 0
+                        = link_to('Add Comment', new_board_item_comment_path(@board, item))
                       - else                           
                         = link_to(pluralize(item.comments.length, 'Comment'), board_item_comments_path(@board, item))
                       
