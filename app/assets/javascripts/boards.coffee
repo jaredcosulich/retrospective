@@ -18,7 +18,7 @@ ready = ->
   $('.autocomplete').each (index, field) ->
     do ->
       field = $(field)
-      field.onfocus(field.select())
+      field.focus( -> field.select() )
       list = field.data('autocomplete')
       field.autocomplete(delay: 10, source: list)
     
