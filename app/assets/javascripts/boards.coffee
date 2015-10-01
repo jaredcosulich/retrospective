@@ -26,18 +26,14 @@ ready = ->
     do ->
       area = $(area)
       endTime = new Date(area.data('time'))
-      secondsOpacity = 1
       setInterval(( -> 
         delta = endTime - new Date()
         hours = delta / (60 * 60 * 1000)
         minutes = (hours % 1) * 60 
-        seconds = (minutes % 1) * 60
-        html = Math.floor(hours) + ' hours, ' + Math.floor(minutes) + ' minutes'
-        if (secondsOpacity > 0)
-          html += '<span class=\'seconds\' style=\'opacity: ' + secondsOpacity + '\'>, ' + Math.floor(seconds) + ' seconds</span>'
-            
-        secondsOpacity -= 0.1;
-        area.html(html)
+        html = []
+        html.push(Math.floor(hours) + ' hours') if Math.floor(hours) > 0
+        html.push(Math.floor(minutes) + ' minutes') if Math.floor(minutes) > 0
+        area.html(html.join(', '))
       ), 1000)
       
     

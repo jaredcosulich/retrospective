@@ -48,6 +48,28 @@
 
 
 .row.buffer.thrice
+.row.buffer.thrice
   .col-sm-12.center.buffer.thrice
-    Share this board using this link:
-    = link_to(board_url(@board), @board)
+    %p 
+      Share this retrospective board using this link:
+      = link_to(board_url(@board), @board)
+    %p
+      The password is: 
+      = @board.password
+    %p
+      A link with the password included is:
+      = link_to(board_url(@board, p: @board.password), @board)
+
+
+.row.buffer.thrice
+.row.buffer.thrice
+  .col-sm-12.center.buffer.thrice
+    %h4 Instructions
+    %p 
+      The goal here is to share feedback about what is working, what is not working, and what you are concerned about.
+    %p
+      This won't work unless everyone is honest with their feedback and that feedback is received well.
+    %p
+      Simply click the "Add Item" button in each column to add something.
+    %p
+      If you're not sure what to think about something, add it to the middle column.
