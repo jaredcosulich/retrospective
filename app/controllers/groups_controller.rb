@@ -16,7 +16,7 @@ class GroupsController < ApplicationController
 
   # GET /groups/new
   def new
-    @group = Group.new
+    @group = Group.new(child_group_id: params[:child_group_id], parent_group_id: params[:parent_group_id])
   end
 
   # GET /groups/1/edit

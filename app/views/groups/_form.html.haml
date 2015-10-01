@@ -19,5 +19,7 @@
       = f.text_area :description
   
   .actions.buffer.thrice
+    = f.hidden_field :child_group_id
+    = f.hidden_field :parent_group_id
     = f.submit 'Save', class: 'btn btn-default'
     = link_to 'Cancel', root_path, class: 'btn btn-default'
