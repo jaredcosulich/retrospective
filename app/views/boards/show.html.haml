@@ -1,6 +1,9 @@
-.row.buffer
+.row
   .col-sm-12.col-md-6.center
-    %h3= @board.name
+    %h3
+      = @board.name
+      - if @board.group
+        %span.small= "(#{link_to(@board.group.title, @board.group)})".html_safe
   .col-sm-12.col-md-6.center
     .buffer
       This retrospective will close in:

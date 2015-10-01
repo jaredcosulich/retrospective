@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :groups
   resources :boards do
     resources :items do
       resources :comments

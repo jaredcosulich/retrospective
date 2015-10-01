@@ -1,7 +1,11 @@
 .row
   .col-sm-12.center
-    %h3 New Retrospective Board
-
+    %h3 
+      New Retrospective Board
+      - if @group.present?
+        For
+        = @group.title
+      
 .row
   .col-sm-12.center
     = render 'form'

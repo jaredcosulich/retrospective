@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150930212753) do
+ActiveRecord::Schema.define(version: 20151001151115) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20150930212753) do
     t.string   "name"
     t.string   "password"
     t.string   "slug"
+    t.integer  "group_id"
   end
 
   add_index "boards", ["slug"], name: "index_boards_on_slug", using: :btree
@@ -40,6 +41,15 @@ ActiveRecord::Schema.define(version: 20150930212753) do
   end
 
   add_index "comments", ["slug"], name: "index_comments_on_slug", using: :btree
+
+  create_table "groups", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "parent_group_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "slug"
+  end
 
   create_table "items", force: :cascade do |t|
     t.string   "column_name"

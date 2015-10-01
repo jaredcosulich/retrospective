@@ -14,13 +14,16 @@ class BoardsController < ApplicationController
 
   # GET /boards/new
   def new
+    @group = Group.friendly.find(params[:group_id]) if params.include?(:group_id)
+    
     @board = Board.new(
       name: "#{Date.today.strftime('%m/%d/%Y')} Retro",
       password: Board.generate_password,
       duration: 24, 
       good_column_name: 'Good', 
       bad_column_name: 'Bad', 
-      meh_column_name: 'Meh'
+      meh_column_name: 'Meh',
+      group_id: params[:group_id]
     )
   end
 
@@ -76,6 +79,6 @@ class BoardsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def board_params
-      params.require(:board).permit(:name, :password, :good_column_name, :bad_column_name, :meh_column_name, :duration)
+      params.require(:board).permit(:name, :password, :good_column_name, :bad_column_name, :meh_column_name, :duration, :group_id)
     end
 end

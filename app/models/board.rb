@@ -1,6 +1,7 @@
 require 'sluggable'
 
 class Board < ActiveRecord::Base
+  belongs_to :group
   has_many :items
   
   extend FriendlyId  

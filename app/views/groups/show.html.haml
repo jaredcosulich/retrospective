@@ -1,0 +1,48 @@
+#notice.center= notice
+
+.row
+  .col-sm-12.center
+    %h3= @group.title
+    - if @group.description.present?
+      %p= @group.description
+
+.row.buffer.twice
+
+  .col-sm-12.col-md-6
+    %h5 Retrospective Boards
+    - if @boards.empty?
+      %p
+        = @group.title
+        does not have any retrospective boards associated with it.
+    
+    %p= link_to 'Create A New Retrospective Board', new_board_path(group_id: @group.id), class: 'btn btn-primary'
+    
+    - @boards.each do |board|
+      %p= link_to board.name, board
+
+
+  .col-sm-12.col-md-6
+    %h5 Parent Organization / Project
+    - if @group.parent_group
+      %p= link_to @group.parent_group.title, @group.parent_group
+    - else
+      %p
+        = @group.title
+        does not have a parent organization / group.
+
+    %p= link_to 'Create A Parent Group', new_group_path(child_group_id: @group.id), class: 'btn btn-primary'
+    
+    %br
+    %br 
+    
+    %h5 Sub Projects / Groups
+    - if @children.empty?
+      %p
+        = @group.title
+        does not have any associated sub groups.
+        
+    - @children.each do |group|
+      %p= link_to group.title, group
+      
+    %p= link_to 'Create Sub Group', new_group_path(parent_group_id: @group.id), class: 'btn btn-primary'
+
