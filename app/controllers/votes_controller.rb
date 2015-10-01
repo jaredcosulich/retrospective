@@ -42,17 +42,17 @@ class VotesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_board
-      @board = Board.find(params[:board_id])
+      @board = Board.friendly.find(params[:board_id])
     end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_item
-      @item = @board.items.find(params[:item_id])
+      @item = @board.items.friendly.find(params[:item_id])
     end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_vote
-      @vote = @item.votes.find(params[:id])
+      @vote = @item.votes.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
