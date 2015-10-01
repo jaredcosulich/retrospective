@@ -7,7 +7,7 @@
   .col-sm-12.col-md-6.center
     .buffer
       This retrospective will close in:
-      .countdown{data: {time: @board.close_at}} &nbsp;
+      .countdown{data: {time: @board.close_at.to_i * 1000}} &nbsp;
 
 .row.buffer.thrice
   - ['good', 'meh', 'bad'].each do |column_grouping|
@@ -61,7 +61,7 @@
       = @board.password
     %p
       A link with the password included is:
-      = link_to(board_url(@board, p: @board.password), @board)
+      = link_to(board_url(@board, p: @board.password), board_path(@board, p: @board.password))
 
 
 .row.buffer.thrice

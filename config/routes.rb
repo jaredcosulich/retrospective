@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :groups
   resources :boards do
+    get :password
+    post :password
     resources :items do
       resources :comments
       resources :votes

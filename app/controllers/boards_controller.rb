@@ -1,5 +1,5 @@
 class BoardsController < ApplicationController
-  before_action :set_board, only: [:show, :edit, :update, :destroy]
+  before_action :set_board, only: [:show, :edit, :update, :destroy, :password]
 
   # GET /boards
   # GET /boards.json
@@ -10,8 +10,22 @@ class BoardsController < ApplicationController
   # GET /boards/1
   # GET /boards/1.json
   def show
+    if @board.password.present?
+      saved_password = params[:p] || cookies.signed["board_#{@board.slug}_password"]
+      if saved_password.blank? or saved_password != @board.password
+        flash[:alert] = 'That password was incorrect.' unless saved_password.blank?
+        redirect_to board_password_path(@board)
+        return
+      end
+    end
   end
 
+  def password
+    render and return if request.get?
+    cookies.signed["board_#{@board.slug}_password"] = params[:password]
+    redirect_to @board
+  end
+  
   # GET /boards/new
   def new
     @group = Group.friendly.find(params[:group_id]) if params.include?(:group_id)
@@ -30,12 +44,13 @@ class BoardsController < ApplicationController
   # GET /boards/1/edit
   def edit
   end
+  
 
   # POST /boards
   # POST /boards.json
   def create
     @board = Board.new(board_params)
-
+    
     respond_to do |format|
       if @board.save
         format.html { redirect_to @board, notice: 'Board was successfully created.' }
@@ -74,7 +89,7 @@ class BoardsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_board
-      @board = Board.friendly.find(params[:id])
+      @board = Board.friendly.find(params[:id] || params[:board_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
