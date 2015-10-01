@@ -7,21 +7,25 @@
       %ul
         - @board.errors.full_messages.each do |message|
           %li= message
-  .field.buffer
-    = f.label :good_column_name
-    %br
-      = f.text_field :good_column_name
+          
   .field.buffer.twice
-    = f.label :meh_column_name
+    = f.hidden_field :good_column_name
+    = f.hidden_field :meh_column_name
+    = f.hidden_field :bad_column_name
+
+    = f.label :password, 'Please set a password for this retrospective board:'
+    .wide-text
+      = f.text_field :password, class: 'center', autofocus: true
+
+
+  .field.buffer.thrice
+    = f.label :name, 'Please provide a name for this retrospective board:'
+    .wide-text
+      = f.text_field :name, class: 'center'
+
+  .field.buffer.thrice
+    = f.label :duration, 'How many hours do you want to keep this open for?'
     %br
-      = f.text_field :meh_column_name
-  .field.buffer.twice
-    = f.label :bad_column_name
-    %br
-      = f.text_field :bad_column_name
-  .field.buffer.twice
-    = f.label :close_at
-    %br
-      = f.datetime_select :close_at
+      = f.number_field :duration, class: 'center'
   .actions.buffer.thrice
-    = f.submit
+    = f.submit 'Save', class: 'btn btn-default'

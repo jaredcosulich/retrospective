@@ -21,6 +21,30 @@ ready = ->
       field.focus( -> field.select() )
       list = field.data('autocomplete')
       field.autocomplete(delay: 10, source: list)
+      
+  twoDigits = (number) ->
+    digits = number + ''
+    digits = '0' + digits if digits.length < 2
+    return digits
+    
+  $('.countdown').each (index, area) ->
+    do ->
+      area = $(area)
+      endTime = new Date(area.data('time'))
+      secondsOpacity = 1
+      setInterval(( -> 
+        delta = endTime - new Date()
+        hours = delta / (60 * 60 * 1000)
+        minutes = (hours % 1) * 60 
+        seconds = (minutes % 1) * 60
+        html = twoDigits(Math.floor(hours)) + ' hours, ' + twoDigits(Math.floor(minutes)) + ' minutes'
+        if (secondsOpacity > 0)
+          html += '<span class=\'seconds\' style=\'opacity: ' + secondsOpacity + '\'>, ' + twoDigits(Math.floor(seconds)) + ' seconds</span>'
+            
+        secondsOpacity -= 0.1;
+        area.html(html)
+      ), 1000)
+      
     
 $(document).ready(ready)
 $(document).on('page:load', ready)

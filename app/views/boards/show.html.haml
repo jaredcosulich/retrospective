@@ -1,6 +1,10 @@
 .row.buffer
-  .col-sm-12.center
-    %h2= @board.name
+  .col-sm-12.col-md-6.center
+    %h3= @board.name
+  .col-sm-12.col-md-6.center
+    .buffer
+      This retrospective will close in:
+      .countdown{data: {time: @board.close_at}} &nbsp;
 
 .row.buffer.thrice
   - ['good', 'meh', 'bad'].each do |column_grouping|
@@ -41,3 +45,9 @@
                       |
                       &nbsp;
                       = link_to('Delete', board_item_path(@board, item), method: :delete, data: {confirm: 'Are you sure you want to delete this item?'})
+
+
+.row.buffer.thrice
+  .col-sm-12.center.buffer.thrice
+    Share this board using this link:
+    = link_to(board_url(@board), @board)
