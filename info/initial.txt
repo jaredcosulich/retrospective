@@ -16,7 +16,7 @@ Can add something to each column
 
 
 Board
-  - col-sm-m/time
+  - xxx/time
   - good_column_name
   - meh_column_name
   - bad_column_name
