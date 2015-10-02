@@ -14,7 +14,8 @@
           &nbsp;
           |
           &nbsp;
-          = link_to('Vote', new_board_item_vote_path(@board, item))
+          %a.slidebutton{data: {slideclosest: '.item', slidefind: '.inline-vote-form'}} Vote
+          / = link_to('Vote', new_board_item_vote_path(@board, item))
 
         .col-sm-4                  
           = link_to('Edit', edit_board_item_path(@board, item))                    
@@ -22,3 +23,7 @@
           |
           &nbsp;
           = link_to('Delete', board_item_path(@board, item), method: :delete, data: {confirm: 'Are you sure you want to delete this item?'})
+      
+      = render partial: 'votes/inline_form', locals: {item: item, vote: item.votes.new(user_name: @last_user_name)}
+        
+        

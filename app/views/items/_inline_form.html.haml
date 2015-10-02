@@ -1,4 +1,4 @@
-.row.inline-item-form
+.row.inline-item-form.slide-hide
   .col-sm-12.center.buffer.twice
     = form_for([@board, item]) do |f|
       .field
@@ -6,7 +6,7 @@
           = f.text_field :title, placeholder: 'Title', autofocus: true
           = f.hidden_field :column_name
       
-      - if @item.new_record?
+      - if item.new_record?
         .field.buffer
           .wide-percentage-text
             = f.text_area :comment, placeholder: 'Your Comments'
@@ -14,4 +14,4 @@
       .field.buffer
         = f.text_field :user_name, class: 'autocomplete', placeholder: 'Your Name', data: {autocomplete: @board.names}
         = f.submit 'Save', class: "btn btn-default #{item.column_name.downcase}-grad"
-        %a.hide-inline-form.btn.btn-default Cancel
+        %a.slide-hide-hide.btn.btn-default Cancel

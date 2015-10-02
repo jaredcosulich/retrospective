@@ -22,7 +22,7 @@
         .col-sm-12.center
           %p= @board["#{column_grouping}_column_description"] unless @board["#{column_grouping}_column_description"].blank?
           / = link_to('Add Item', new_board_item_path(@board, column_name: column_name), class: "btn btn-default #{column_grouping}-grad")
-          %a.btn.btn-default.add-item{class: "#{column_grouping}-grad"} Add Item
+          %a.btn.btn-default.slidebutton{class: "#{column_grouping}-grad", data: {slideclosest: '.column', slidefind: '.inline-item-form'}} Add Item
           = render partial: 'items/inline_form', locals: {item: @board.items.new(column_name: column_grouping)}
       .row
         .col-sm-12    

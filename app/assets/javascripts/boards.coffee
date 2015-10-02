@@ -32,11 +32,12 @@ ready = ->
         area.html(html.join(', '))
       ), 1000)
         
-  $('.add-item').click ->
-    $(this).closest('.column').find('.inline-item-form').toggle('slide', {direction: 'up'})
+  $('.slidebutton').click ->
+    closest = $(this).closest($(this).data('slideclosest'))
+    closest.find($(this).data('slidefind')).toggle('slide', {direction: 'up'})
 
-  $('.hide-inline-form').click ->
-    $(this).closest('.inline-item-form').slideUp()
+  $('.slide-hide-hide').click ->
+    $(this).closest('.slide-hide').slideUp()
     
 $(document).ready(ready)
 $(document).on('page:load', ready)

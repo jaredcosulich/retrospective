@@ -10,7 +10,7 @@ class BoardsController < ApplicationController
   # GET /boards/1
   # GET /boards/1.json
   def show
-    @item = @board.items.new
+    @last_user_name = cookies.signed[:last_user_name]
     if @board.password.present?
       cookies.signed["board_#{@board.slug}_password"] = params[:p] if params.include?(:p)
       saved_password = params[:p] || cookies.signed["board_#{@board.slug}_password"]
