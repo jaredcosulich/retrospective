@@ -19,8 +19,17 @@ class Item < ActiveRecord::Base
   include Sluggable  
   after_create :generate_slug
   
+  attr_accessor :comment
+  after_create :create_comment
+  
   def votes_list
     votes.map(&:user).compact.map(&:name).compact.join(', ')
   end
 
+  private
+  
+  def create_comment
+    return unless comment.present?
+    self.comments.create(comment: comment, user: user)
+  end
 end

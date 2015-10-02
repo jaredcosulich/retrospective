@@ -30,6 +30,20 @@ class ItemsControllerTest < ActionController::TestCase
     assert_redirected_to @board
   end
 
+  test "should create item with a comment" do
+    assert_difference('Item.count') do
+      post :create, board_id: @board.id, item: { column_name: 'Good', title: 'Title', user_name: 'Janice Htims', comment: 'comment!' }
+    end
+    
+    item = Item.last
+    assert_equal(1, item.comments.count)
+    
+    comment = item.comments.last
+    assert_equal('comment!', comment.comment)
+    assert_equal(item.user, comment.user)
+    assert_equal(item, comment.item)
+  end
+
   test "should show item" do
     get :show, id: @item, board_id: @board.id
     assert_response :success
