@@ -2,9 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
   
-initAutoComplete: (field) ->
-  field = $(field)  
-  console.log(field.data('autocomplete'))
+constructItem: (data) ->
+    
   
 ready = ->
   columns = $('.column')
