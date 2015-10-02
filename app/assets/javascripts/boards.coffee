@@ -2,9 +2,6 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
   
-constructItem: (data) ->
-    
-  
 ready = ->
   columns = $('.column')
   maxHeight = 0
@@ -34,12 +31,12 @@ ready = ->
         html.push(Math.floor(minutes) + ' minutes') if Math.floor(minutes) > 0
         area.html(html.join(', '))
       ), 1000)
-      
-  $('.show-inline-forms').toggle('slide', direction: 'up')
-  $('.hide-inline-form, .show-inline-forms').click ->
-    $('.quick-add').toggle('slide', direction: 'up')
-    $('.show-inline-forms').toggle('slide', direction: 'up')
-      
+        
+  $('.add-item').click ->
+    $(this).closest('.column').find('.inline-item-form').toggle('slide', {direction: 'up'})
+
+  $('.hide-inline-form').click ->
+    $(this).closest('.inline-item-form').slideUp()
     
 $(document).ready(ready)
 $(document).on('page:load', ready)

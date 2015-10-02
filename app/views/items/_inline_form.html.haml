@@ -1,5 +1,5 @@
-.row
-  .col-sm-12.center
+.row.inline-item-form
+  .col-sm-12.center.buffer.twice
     = form_for([@board, item]) do |f|
       .field
         .wide-percentage-text
@@ -14,4 +14,4 @@
       .field.buffer
         = f.text_field :user_name, class: 'autocomplete', placeholder: 'Your Name', data: {autocomplete: @board.names}
         = f.submit 'Save', class: "btn btn-default #{item.column_name.downcase}-grad"
-        %a.hide-inline-form.btn.btn-default Hide
+        %a.hide-inline-form.btn.btn-default Cancel
