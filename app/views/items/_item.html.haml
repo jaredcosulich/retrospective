@@ -10,7 +10,7 @@
             = link_to(pluralize(item.comments.length, 'Comment'), board_item_comments_path(@board, item))
       
         .col-sm-4                  
-          = link_to(pluralize(item.votes.length, 'Vote'), board_item_votes_path(@board, item), title: item.votes_list, alt: item.votes_list)                      
+          = link_to("<span class='vote-count'>#{pluralize(item.votes.length, 'Vote')}</span>".html_safe, board_item_votes_path(@board, item), title: item.votes_list, alt: item.votes_list)                      
           &nbsp;
           |
           &nbsp;

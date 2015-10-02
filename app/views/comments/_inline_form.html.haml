@@ -1,6 +1,6 @@
-.row.inline-vote-form.slide-hide
+.row.inline-comment-form.slide-hide
   .col-sm-12.center.buffer.twice
-    = form_for([@board, item, vote], remote: true, html: {class: 'remote-update', :'data-type' => 'json', data: {updatefield: '.vote-count'}}) do |f|
+    = form_for([@board, item, vote]) do |f|
       .field.buffer
         %p Vote Up This Item
         = f.text_field :user_name, class: 'autocomplete', placeholder: 'Your Name', data: {autocomplete: @board.names}, autofocus: true

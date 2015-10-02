@@ -39,5 +39,14 @@ ready = ->
   $('.slide-hide-hide').click ->
     $(this).closest('.slide-hide').slideUp()
     
+    
+  $('.remote-update').on 'ajax:complete', (e, xhr, status) ->
+    if (xhr.status == 200) 
+      item = $(this).closest('.item')
+      item.find($(this).data('updatefield')).html(xhr.responseText)
+      $(this).closest('.slide-hide').slideUp()
+    else
+      alert('There was an error. Please reload the browser page.')  
+    
 $(document).ready(ready)
 $(document).on('page:load', ready)
