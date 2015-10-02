@@ -19,7 +19,7 @@ class Board < ActiveRecord::Base
   end  
   
   def self.generate_password
-    chars = %w(2 3 4 5 6 7 8 9 B C D F G H J K M N P Q R S T V W X Y Z b c d f g h j k m n p q r s t & $ # @ * ~ } { ?)
+    chars = %w(2 3 4 5 6 7 8 9 B C D F G H J K M N P Q R S T V W X Y Z b c d f g h j k m n p q r s t)
     (1..12).collect { chars[rand(chars.length)]}.join 
   end
   

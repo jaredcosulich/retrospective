@@ -9,9 +9,6 @@
           %li= message
           
   .field.buffer.twice
-    = f.hidden_field :good_column_name
-    = f.hidden_field :meh_column_name
-    = f.hidden_field :bad_column_name
     = f.hidden_field :group_id
 
     = f.label :password, 'Please set a password for this retrospective board:'
@@ -28,5 +25,38 @@
     = f.label :duration, 'How many hours do you want to keep this open for?'
     %br
       = f.number_field :duration, class: 'center'
+    
+  
+  .advanced
+    .field.buffer.thrice
+      = f.label :good_column_name, 'Good Column Name'
+      .wide-text
+        = f.text_field :good_column_name, class: 'center'
+
+    .field.buffer
+      = f.label :good_column_description, 'Good Column Description'
+      .wide-text
+        = f.text_field :good_column_description, class: 'center'
+
+    .field.buffer.thrice
+      = f.label :meh_column_name, 'Meh Column Name'
+      .wide-text
+        = f.text_field :meh_column_name, class: 'center'
+
+    .field.buffer
+      = f.label :meh_column_description, 'Meh Column Description'
+      .wide-text
+        = f.text_field :meh_column_description, class: 'center'
+
+    .field.buffer.thrice
+      = f.label :bad_column_name, 'Bad Column Name'
+      .wide-text
+        = f.text_field :bad_column_name, class: 'center'
+
+    .field.buffer
+      = f.label :bad_column_description, 'Bad Column Description'
+      .wide-text
+        = f.text_field :bad_column_description, class: 'center'
+
   .actions.buffer.thrice
     = f.submit 'Save', class: 'btn btn-default'

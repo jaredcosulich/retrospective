@@ -10,7 +10,9 @@ class BoardsController < ApplicationController
   # GET /boards/1
   # GET /boards/1.json
   def show
+    @item = @board.items.new
     if @board.password.present?
+      cookies.signed["board_#{@board.slug}_password"] = params[:p] if params.include?(:p)
       saved_password = params[:p] || cookies.signed["board_#{@board.slug}_password"]
       if saved_password.blank? or saved_password != @board.password
         flash[:alert] = 'That password was incorrect.' unless saved_password.blank?
@@ -37,6 +39,9 @@ class BoardsController < ApplicationController
       good_column_name: 'Good', 
       bad_column_name: 'Bad', 
       meh_column_name: 'Meh',
+      good_column_description: 'What worked well this past week?', 
+      bad_column_description: 'What went badly this past week?', 
+      meh_column_description: 'What were you concerned about this past week?',
       group_id: params[:group_id]
     )
   end
@@ -53,7 +58,7 @@ class BoardsController < ApplicationController
     
     respond_to do |format|
       if @board.save
-        format.html { redirect_to @board, notice: 'Board was successfully created.' }
+        format.html { redirect_to board_path(@board, p: @board.password), notice: 'Board was successfully created.' }
         format.json { render :show, status: :created, location: @board }
       else
         format.html { render :new }
@@ -94,6 +99,6 @@ class BoardsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def board_params
-      params.require(:board).permit(:name, :password, :good_column_name, :bad_column_name, :meh_column_name, :duration, :group_id)
+      params.require(:board).permit(:name, :password, :good_column_name, :bad_column_name, :meh_column_name, :good_column_description, :bad_column_description, :meh_column_description, :duration, :group_id)
     end
 end

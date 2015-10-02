@@ -36,6 +36,11 @@ ready = ->
         area.html(html.join(', '))
       ), 1000)
       
+  $('.show-inline-forms').toggle('slide', direction: 'up')
+  $('.hide-inline-form, .show-inline-forms').click ->
+    $('.quick-add').toggle('slide', direction: 'up')
+    $('.show-inline-forms').toggle('slide', direction: 'up')
+      
     
 $(document).ready(ready)
 $(document).on('page:load', ready)

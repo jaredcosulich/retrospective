@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151001151115) do
+ActiveRecord::Schema.define(version: 20151002150540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,13 +20,16 @@ ActiveRecord::Schema.define(version: 20151001151115) do
     t.string   "good_column_name"
     t.string   "bad_column_name"
     t.string   "meh_column_name"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.datetime "close_at"
     t.string   "name"
     t.string   "password"
     t.string   "slug"
     t.integer  "group_id"
+    t.string   "good_column_description"
+    t.string   "meh_column_description"
+    t.string   "bad_column_description"
   end
 
   add_index "boards", ["slug"], name: "index_boards_on_slug", using: :btree

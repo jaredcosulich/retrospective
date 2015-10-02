@@ -20,7 +20,12 @@
     
       .row.buffer
         .col-sm-12.center
+          %p= @board["#{column_grouping}_column_description"] unless @board["#{column_grouping}_column_description"].blank?
           = link_to('Add Item', new_board_item_path(@board, column_name: column_name), class: "btn btn-default #{column_grouping}-grad")
+          / .show-inline-forms
+          /   %a.btn.btn-default Show Forms
+          / .quick-add
+          /   = render partial: 'items/inline_form', locals: {item: @board.items.new(column_name: column_grouping)}
       .row
         .col-sm-12    
           - @board.items.recent.for_column(column_name).each do |item|
@@ -36,7 +41,7 @@
                         = link_to(pluralize(item.comments.length, 'Comment'), board_item_comments_path(@board, item))
                       
                     .col-sm-4                  
-                      = link_to(pluralize(item.votes.length, 'vote'), board_item_votes_path(@board, item), title: item.votes_list, alt: item.votes_list)                      
+                      = link_to(pluralize(item.votes.length, 'Vote'), board_item_votes_path(@board, item), title: item.votes_list, alt: item.votes_list)                      
                       &nbsp;
                       |
                       &nbsp;
@@ -50,6 +55,7 @@
                       = link_to('Delete', board_item_path(@board, item), method: :delete, data: {confirm: 'Are you sure you want to delete this item?'})
 
 
+.row.buffer.thrice
 .row.buffer.thrice
 .row.buffer.thrice
   .col-sm-12.center.buffer.thrice
