@@ -11,14 +11,19 @@ class BoardsController < ApplicationController
   # GET /boards/1.json
   def show
     @last_user_name = cookies.signed[:last_user_name]
-    if @board.password.present?
-      cookies.signed["board_#{@board.slug}_password"] = params[:p] if params.include?(:p)
-      saved_password = params[:p] || cookies.signed["board_#{@board.slug}_password"]
-      if saved_password.blank? or saved_password != @board.password
-        flash[:alert] = 'That password was incorrect.' unless saved_password.blank?
-        redirect_to board_password_path(@board)
-        return
+    respond_to do |format|
+      format.html do 
+        if @board.password.present?
+          cookies.signed["board_#{@board.slug}_password"] = params[:p] if params.include?(:p)
+          saved_password = params[:p] || cookies.signed["board_#{@board.slug}_password"]
+          if saved_password.blank? or saved_password != @board.password
+            flash[:alert] = 'That password was incorrect.' unless saved_password.blank?
+            redirect_to board_password_path(@board)
+            return
+          end
+        end
       end
+      format.json { render :show, status: :created, location: @board }
     end
   end
 

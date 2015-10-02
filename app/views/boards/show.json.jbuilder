@@ -1,1 +1,5 @@
-json.extract! @board, :id, :good_column_name, :bad_column_name, :meh_column_name, :close_at, :name, :created_at, :updated_at
+json.array!(@board.items) do |item|
+  json.extract! item, :id
+  json.vote_count item.votes.count
+  json.comments_count item.comments.count  
+end

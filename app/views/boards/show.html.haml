@@ -9,7 +9,7 @@
       This retrospective will close in:
       .countdown{data: {time: @board.close_at.to_i * 1000}} &nbsp;
 
-.row.buffer.thrice
+.row.buffer.thrice.remote-updater{data: {updaterurl: board_path(@board)}}
   - ['good', 'meh', 'bad'].each do |column_grouping|
     - column_name = @board["#{column_grouping}_column_name"]
     

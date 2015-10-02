@@ -34,11 +34,12 @@ ready = ->
         
   $('.slidebutton').click ->
     closest = $(this).closest($(this).data('slideclosest'))
-    closest.find($(this).data('slidefind')).toggle('slide', {direction: 'up'})
+    toSlide = closest.find($(this).data('slidefind'))
+    toSlide.toggle('slide', {direction: 'up'})
+    toSlide.find('input[autofocus]').focus()
 
   $('.slide-hide-hide').click ->
     $(this).closest('.slide-hide').slideUp()
-    
     
   $('.remote-update').on 'ajax:complete', (e, xhr, status) ->
     if (xhr.status == 200) 
@@ -47,6 +48,18 @@ ready = ->
       $(this).closest('.slide-hide').slideUp()
     else
       alert('There was an error. Please reload the browser page.')  
+      
+  # $('.remote-updater').each ->
+  #   do =>
+  #     url = $(this).data('updaterurl')
+  #     setInterval(( ->
+  #       $.ajax(
+  #         url: url,
+  #         dataType: 'json',
+  #         complete: (data) ->
+  #           console.log(JSON.parse(data.responseText))
+  #       )
+  #     ), 3000)
     
 $(document).ready(ready)
 $(document).on('page:load', ready)
