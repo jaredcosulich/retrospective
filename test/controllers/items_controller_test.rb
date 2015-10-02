@@ -24,7 +24,7 @@ class ItemsControllerTest < ActionController::TestCase
     item = @board.items.last
     
     assert_equal('Title', item.title)
-    assert_equal('Good', item.column_name)
+    assert_equal('good', item.column_name)
     assert_equal('Janice Htims', item.user.name)
 
     assert_redirected_to @board
