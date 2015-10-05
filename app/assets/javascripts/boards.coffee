@@ -9,7 +9,7 @@ ready = ->
     height = $(column).height()
     maxHeight = height if maxHeight < height
   
-  columns.height(maxHeight + 420)
+  columns.height(maxHeight + 150)
   
   $('.autocomplete').each (index, field) ->
     do ->
