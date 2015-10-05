@@ -18,7 +18,7 @@
     %p= link_to 'Create A New Retrospective Board', new_board_path(group_id: @group.id), class: 'btn btn-primary'
     
     - @boards.each do |board|
-      %p= link_to board.name, board
+      %p= link_to board.name, board_path(board, p: board.password)
 
 
   .col-sm-12.col-md-6
