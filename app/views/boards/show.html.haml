@@ -26,7 +26,7 @@
           = render partial: 'items/inline_form', locals: {item: @board.items.new(user_name: @last_user_name, column_name: column_grouping)}
       .row
         .col-sm-12    
-          = render @board.items.recent.for_column(column_name)
+          = render @board.items.popular.for_column(column_name)
                 
 
 .row.buffer.thrice

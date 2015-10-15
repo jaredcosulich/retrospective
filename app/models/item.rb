@@ -7,7 +7,8 @@ class Item < ActiveRecord::Base
   has_many :comments
   has_many :votes
   
-  scope :for_column, -> (column_name) { where("column_name = ?", column_name.downcase) }   
+  scope :for_column, -> (column_name) { where("column_name = ?", column_name.downcase) }  
+  scope :popular, -> { order(votes_count: :desc, comments_count: :desc, id: :desc)} 
   scope :recent, -> { order(id: :desc) } 
   
   validates_presence_of :title

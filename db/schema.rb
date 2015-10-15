@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151002150540) do
+ActiveRecord::Schema.define(version: 20151015010903) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,10 +58,12 @@ ActiveRecord::Schema.define(version: 20151002150540) do
     t.string   "column_name"
     t.integer  "board_id"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.string   "title"
     t.string   "slug"
+    t.integer  "votes_count",    default: 0
+    t.integer  "comments_count", default: 0
   end
 
   add_index "items", ["slug"], name: "index_items_on_slug", using: :btree
