@@ -7,13 +7,17 @@
   .col-sm-12.col-md-6.center
     .buffer
       This retrospective will close in:
-      .countdown{data: {time: @board.close_at.to_i * 1000}} &nbsp;
+      - if @board.closed?
+        %br
+        %b Closed
+      - else
+        .countdown{data: {time: @board.close_at.to_i * 1000}} &nbsp;
 
 .row.buffer
   .col.col-sm-12.center
-    = link_to_if(params.include?(:sort), 'Recently Added', params.except(:sort))
+    = link_to_unless(@sort == 'recent', 'Recently Added', params.merge(sort: 'recent'))
     &nbsp; | &nbsp;
-    = link_to_unless(params[:sort] == 'vote', 'Most Voted', params.merge(sort: 'vote'))
+    = link_to_unless(@sort == 'vote', 'Most Voted', params.merge(sort: 'vote'))
 
 .row.buffer.thrice.remote-updater{data: {updaterurl: board_path(@board)}}
   - ['good', 'meh', 'bad'].each do |column_grouping|

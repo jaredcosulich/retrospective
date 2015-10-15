@@ -22,10 +22,13 @@ class BoardsController < ApplicationController
             return
           end
         end
-        case params[:sort]
+
+        @sort = params[:sort]
+        @sort = @board.closed? ? 'vote' : 'recent' if @sort.blank?
+        case @sort
         when 'vote'
           @items = @board.items.voted
-        else
+        when 'recent'
           @items = @board.items.recent
         end
       end

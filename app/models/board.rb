@@ -23,6 +23,10 @@ class Board < ActiveRecord::Base
     (1..12).collect { chars[rand(chars.length)]}.join 
   end
   
+  def closed?
+    close_at < Time.now
+  end
+  
   private
   def set_close_at
     return unless duration.present?
