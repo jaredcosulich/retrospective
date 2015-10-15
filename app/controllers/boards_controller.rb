@@ -22,6 +22,12 @@ class BoardsController < ApplicationController
             return
           end
         end
+        case params[:sort]
+        when 'vote'
+          @items = @board.items.voted
+        else
+          @items = @board.items.recent
+        end
       end
       format.json { render :show, status: :created, location: @board }
     end

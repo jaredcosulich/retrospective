@@ -9,6 +9,12 @@
       This retrospective will close in:
       .countdown{data: {time: @board.close_at.to_i * 1000}} &nbsp;
 
+.row.buffer
+  .col.col-sm-12.center
+    = link_to_if(params.include?(:sort), 'Recently Added', params.except(:sort))
+    &nbsp; | &nbsp;
+    = link_to_unless(params[:sort] == 'vote', 'Most Voted', params.merge(sort: 'vote'))
+
 .row.buffer.thrice.remote-updater{data: {updaterurl: board_path(@board)}}
   - ['good', 'meh', 'bad'].each do |column_grouping|
     - column_name = @board["#{column_grouping}_column_name"]
@@ -26,7 +32,7 @@
           = render partial: 'items/inline_form', locals: {item: @board.items.new(user_name: @last_user_name, column_name: column_grouping)}
       .row
         .col-sm-12    
-          = render @board.items.popular.for_column(column_name)
+          = render @items.for_column(column_name)
                 
 
 .row.buffer.thrice
