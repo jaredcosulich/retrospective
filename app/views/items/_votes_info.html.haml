@@ -1,0 +1,6 @@
+= link_to("<span class='vote-count'>#{pluralize(item.votes.map(&:id).compact.length, 'Vote')}</span>".html_safe, board_item_path(@board, item), title: item.votes_list, alt: item.votes_list)                      
+&nbsp;
+|
+&nbsp;
+%a.slidebutton{data: {slideclosest: '.item', slidefind: '.inline-vote-form'}} Vote
+/ = link_to('Vote', new_board_item_vote_path(@board, item))

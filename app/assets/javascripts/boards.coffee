@@ -2,6 +2,42 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
   
+updateInterval = false  
+setUpdateInterval = (url) ->
+  clearInterval(updateInterval) if updateInterval
+  
+  url = $('.board-update').data('updaterurl')
+  interval = [10, 30, 60, 300, 600, 1800, 0][$('.auto-update-select')[0].selectedIndex]
+  lastUpdateAt = new Date().getTime() unless lastUpdateAt 
+  updateInterval = setInterval(( ->
+    $.ajax(
+      url: "#{url}?time=#{lastUpdateAt}",
+      dataType: 'json',
+      complete: (data) ->
+        lastUpdateAt = new Date().getTime()
+        if (data.responseText.length)
+          items = $(JSON.parse(data.responseText))
+          items.each (index, item) ->
+            foundItem = $("#item-#{item.id}")
+            if (foundItem.length)
+              foundItem.find('.title-info').html(item.title)
+              foundItem.find('.vote-info').html(item.vote_html)
+              foundItem.find('.comment-info').html(item.comment_html)
+              foundItem.find('.inner').effect('highlight', {}, 3000)
+            else 
+              column = $(".#{item.column_name} .items")
+              column.prepend(item.html)
+              column.find("#item-#{item.id} .inner").effect('highlight', {}, 3000)
+    )
+  ), interval * 1000)
+  
+addItems = (column, items) ->
+  container = document.createElement('DIV')
+  for item in items
+    container.prepend(item.html)
+  container.slideUp()
+  
+  
 ready = ->
   columns = $('.column')
   maxHeight = 0
@@ -49,17 +85,8 @@ ready = ->
     else
       alert('There was an error. Please reload the browser page.')  
       
-  # $('.remote-updater').each ->
-  #   do =>
-  #     url = $(this).data('updaterurl')
-  #     setInterval(( ->
-  #       $.ajax(
-  #         url: url,
-  #         dataType: 'json',
-  #         complete: (data) ->
-  #           console.log(JSON.parse(data.responseText))
-  #       )
-  #     ), 3000)
+  $('.auto-update-select').change -> setUpdateInterval()    
+  $('.board-update').each -> setUpdateInterval()
     
 $(document).ready(ready)
 $(document).on('page:load', ready)

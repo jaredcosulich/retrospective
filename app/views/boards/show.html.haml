@@ -19,7 +19,7 @@
     &nbsp; | &nbsp;
     = link_to_unless(@sort == 'vote', 'Most Voted', params.merge(sort: 'vote'))
 
-.row.buffer.thrice.remote-updater{data: {updaterurl: board_path(@board)}}
+.row.buffer.thrice.board-update{data: {updaterurl: board_path(@board)}}
   - ['good', 'meh', 'bad'].each do |column_grouping|
     - column_name = @board["#{column_grouping}_column_name"]
     
@@ -35,14 +35,21 @@
           %a.btn.btn-default.slidebutton{class: "#{column_grouping}-grad", data: {slideclosest: '.column', slidefind: '.inline-item-form'}} Add Item
           = render partial: 'items/inline_form', locals: {item: @board.items.new(user_name: @last_user_name, column_name: column_grouping)}
       .row
-        .col-sm-12    
+        .col-sm-12.items    
           = render @items.for_column(column_name)
-                
+
 
 .row.buffer.thrice
 .row.buffer.thrice
+  .col-sm-12.center.buffer.thrice
+    %h5 Auto Update
+    %p This board will automatically display items added by other people.
+    %p= select_tag 'auto-update-select', options_for_select(['Every 10 Seconds', 'Every 30 Seconds', 'Every Minute', 'Every 5 Minutes', 'Every 10 Minutes', 'Every 30 Minutes', 'Never - Update Off'], "Every Minute"), class: 'auto-update-select'
+
+.row.buffer.thrice
 .row.buffer.thrice
   .col-sm-12.center.buffer.thrice
+    %h5 Sharing
     %p 
       Share this retrospective board using this link:
       = link_to(board_url(@board), @board)

@@ -3,7 +3,7 @@ require 'sluggable'
 
 class Vote < ActiveRecord::Base
   belongs_to :user
-  belongs_to :item, counter_cache: true
+  belongs_to :item, counter_cache: true, :touch => true
   
   scope :recent, -> { order(id: :desc) } 
 

@@ -32,7 +32,14 @@ class BoardsController < ApplicationController
           @items = @board.items.recent
         end
       end
-      format.json { render :show, status: :created, location: @board }
+      format.json do 
+        @time = Time.at( params[:time].to_i / 1000.0 )
+        if @board.updated_at < @time
+          head :ok
+        else
+          render :show, status: :created, location: @board
+        end
+      end
     end
   end
 

@@ -1,21 +1,12 @@
 .row.item{id: "item-#{item.id}"}
   .col-sm-12.buffer.twice   
     .inner{class: "#{item.column_name}-grad"}
-      %p.center= link_to(item.title, board_item_path(@board, item))
+      %p.center= link_to(item.title, board_item_path(@board, item), class: 'title-info')
       .row.small.center
-        .col-sm-4    
-          - if item.comments.length <= 0
-            = link_to('Add Comment', new_board_item_comment_path(@board, item))
-          - else                           
-            = link_to(pluralize(item.comments.length, 'Comment'), board_item_path(@board, item))
-    
-        .col-sm-4                  
-          = link_to("<span class='vote-count'>#{pluralize(item.votes.length, 'Vote')}</span>".html_safe, board_item_path(@board, item), title: item.votes_list, alt: item.votes_list)                      
-          &nbsp;
-          |
-          &nbsp;
-          %a.slidebutton{data: {slideclosest: '.item', slidefind: '.inline-vote-form'}} Vote
-          / = link_to('Vote', new_board_item_vote_path(@board, item))
+        .col-sm-4.comment-info
+          = render partial: 'items/comments_info', locals: {item: item}
+        .col-sm-4.vote-info                  
+          = render partial: 'items/votes_info', locals: {item: item}
 
         .col-sm-4                  
           = link_to('Edit', edit_board_item_path(@board, item))                    

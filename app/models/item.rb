@@ -2,11 +2,12 @@ require 'user_namable'
 require 'sluggable'
 
 class Item < ActiveRecord::Base
-  belongs_to :board
+  belongs_to :board, :touch => true
   belongs_to :user
   has_many :comments
   has_many :votes
   
+  scope :updated_after, -> (time) { where("updated_at > ?", time) }
   scope :for_column, -> (column_name) { where("column_name = ?", column_name.downcase) }  
   scope :voted, -> { order(votes_count: :desc, comments_count: :desc, id: :desc)} 
   scope :recent, -> { order(id: :desc) } 

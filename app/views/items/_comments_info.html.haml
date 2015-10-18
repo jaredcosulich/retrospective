@@ -1,0 +1,4 @@
+- if item.comments.length <= 0
+  = link_to('Add Comment', new_board_item_comment_path(@board, item))
+- else                           
+  = link_to("<span class='comment-count'>#{pluralize(item.comments.length, 'Comment')}</span>".html_safe, board_item_path(@board, item))
