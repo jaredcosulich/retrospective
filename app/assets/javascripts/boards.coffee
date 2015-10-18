@@ -6,16 +6,20 @@ updateInterval = false
 setUpdateInterval = (url) ->
   clearInterval(updateInterval) if updateInterval
   
-  url = $('.board-update').data('updaterurl')
-  interval = [10, 30, 60, 300, 600, 1800, 0][$('.auto-update-select')[0].selectedIndex]
   lastUpdateAt = new Date().getTime() unless lastUpdateAt 
+  updateSelect = $('.auto-update-select')[0]  
+  intervalOptions = [5, 10, 30, 60, 300, (60 * 60), (60 * 60 * 24), -1]
+  interval = intervalOptions[updateSelect.selectedIndex]
+  return if interval <= 0
+
+  url = $('.board-update').data('updaterurl')
   updateInterval = setInterval(( ->
     $.ajax(
       url: "#{url}?time=#{lastUpdateAt}",
       dataType: 'json',
       complete: (data) ->
-        lastUpdateAt = new Date().getTime()
         if (data.responseText.length)
+          lastUpdateAt = new Date().getTime()
           items = $(JSON.parse(data.responseText))
           items.each (index, item) ->
             foundItem = $("#item-#{item.id}")
@@ -28,6 +32,13 @@ setUpdateInterval = (url) ->
               column = $(".#{item.column_name} .items")
               column.prepend(item.html)
               column.find("#item-#{item.id} .inner").effect('highlight', {}, 3000)
+        else
+          delay = 1000 * interval * 3
+          delay = (1000 * 60 * 30) if delay < (1000 * 60 * 30)
+          if ((new Date().getTime() - lastUpdateAt) > delay)
+            updateSelect.selectedIndex = updateSelect.selectedIndex + 1
+            interval = intervalOptions[updateSelect.selectedIndex]
+            
     )
   ), interval * 1000)
   
