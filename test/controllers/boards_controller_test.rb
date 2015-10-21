@@ -36,6 +36,13 @@ class BoardsControllerTest < ActionController::TestCase
     get :show, id: @board
     assert_response :success
   end
+  
+  test "should show board with forms for items in each column" do
+    get :show, id: @board
+    assert_select "input[type=hidden][id=item_column_name][value=awesome]", {count: 1}
+    assert_select "input[type=hidden][id=item_column_name][value=yucky]", {count: 1}
+    assert_select "input[type=hidden][id=item_column_name][value=horrible]", {count: 1}
+  end
 
   test "should get edit" do
     get :edit, id: @board

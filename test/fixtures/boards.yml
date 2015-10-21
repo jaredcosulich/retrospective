@@ -2,9 +2,9 @@
 
 board_one:
   name: Board One
-  good_column_name: MyString
-  bad_column_name: MyString
-  meh_column_name: MyString
+  good_column_name: Awesome
+  bad_column_name: Horrible
+  meh_column_name: Yucky
   close_at: 2015-09-28 18:46:12
 
 board_two:
