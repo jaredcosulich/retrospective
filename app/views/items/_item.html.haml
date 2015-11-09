@@ -2,6 +2,7 @@
   .col-sm-12.buffer.twice   
     .inner{class: "#{item.column_name}-grad"}
       %p.center= link_to(item.title, board_item_path(@board, item), class: 'title-info')
+      %p.small= truncate(item.comments.first.comment, length: 66)
       .row.small.center
         .col-sm-4.comment-info
           = render partial: 'items/comments_info', locals: {item: item}
