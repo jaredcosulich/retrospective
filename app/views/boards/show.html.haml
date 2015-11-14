@@ -50,15 +50,15 @@
 .row.buffer.thrice
   .col-sm-12.center.buffer.thrice
     %h5 Sharing
-    %p 
-      Share this retrospective board using this link:
-      = link_to(board_url(@board), @board)
     %p
-      The password is: 
+      Board Password: 
       = @board.password
     %p
-      A link with the password included is:
+      Link with password:
       = link_to(board_url(@board, p: @board.password), board_path(@board, p: @board.password))
+    %p 
+      Link without password:
+      = link_to(board_url(@board), @board)
 
 
 .row.buffer.thrice
