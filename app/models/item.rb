@@ -26,6 +26,8 @@ class Item < ActiveRecord::Base
   attr_accessor :comment
   after_create :create_comment
   
+  after_create :create_vote
+  
   before_save :downcase_column_name
   
   def votes_list
@@ -37,6 +39,10 @@ class Item < ActiveRecord::Base
   def create_comment
     return unless comment.present?
     self.comments.create(comment: comment, user: user)
+  end
+  
+  def create_vote
+    self.votes.create(user: user)
   end
   
   def downcase_column_name
