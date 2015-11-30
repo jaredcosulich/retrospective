@@ -8,9 +8,10 @@
           .vote-info
             = render partial: 'items/votes_info', locals: {item: item}
 
-      .row.buffer
-        .col-sm-12
-          %p.small= truncate(item.comments.first.comment, length: 200)
+      - unless item.comments.empty?
+        .row.buffer
+          .col-sm-12
+            %p.small= truncate(item.comments.first.comment, length: 200)
 
       .row.small.center
         .col-sm-6
