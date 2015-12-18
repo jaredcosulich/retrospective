@@ -20,7 +20,8 @@ setUpdateInterval = (url) ->
       complete: (data) ->
         if (data.responseText.length)
           lastUpdateAt = new Date().getTime()
-          items = $(JSON.parse(data.responseText))
+          info = JSON.parse(data.responseText)
+          items = $(info.items)
           items.each (index, item) ->
             foundItem = $("#item-#{item.id}")
             if (foundItem.length)
@@ -32,6 +33,7 @@ setUpdateInterval = (url) ->
               column = $(".#{item.column_name} .items")
               column.prepend(item.html)
               column.find("#item-#{item.id} .inner").effect('highlight', {}, 3000)
+          $('.contributors').html(info.contributors)
         else
           delay = 1000 * interval * 3
           delay = (1000 * 60 * 30) if delay < (1000 * 60 * 30)

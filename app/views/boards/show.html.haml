@@ -19,6 +19,11 @@
     &nbsp; | &nbsp;
     = link_to_unless(@sort == 'vote', 'Most Voted', params.merge(sort: 'vote'))
 
+.row.buffer
+  .col.col-sm-12.center
+    Contributors:
+    %span.contributors= @contributors
+
 .row.buffer.thrice.board-update{data: {updaterurl: board_path(@board)}}
   - ['good', 'meh', 'bad'].each do |column_grouping|
     - column_name = @board["#{column_grouping}_column_name"].downcase
@@ -26,7 +31,7 @@
     .column.col-sm-12.col-md-4{class: column_grouping}
       .row
         .col-sm-12
-          %h4.title= column_name
+          %h4.title= column_name.titleize
     
       .row.buffer
         .col-sm-12.center

@@ -11,6 +11,14 @@ class BoardsController < ApplicationController
   # GET /boards/1.json
   def show
     @last_user_name = cookies.signed[:last_user_name]
+        
+    items = @board.items
+    if items.present?
+      @contributors = (items + items.map(&:comments) + items.map(&:votes)).flatten.map(&:user).uniq.map(&:name).sort.join(', ')  
+    else
+      @contributors = 'None Yet'
+    end
+    
     respond_to do |format|
       format.html do 
         if @board.password.present?
