@@ -27,6 +27,8 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     @group = Group.new(group_params)
+    
+    render text: 'Go Away!' and return if @group.description =~ /http/
 
     respond_to do |format|
       if @group.save
