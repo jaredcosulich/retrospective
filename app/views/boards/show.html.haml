@@ -22,17 +22,17 @@
 .row.buffer
   .col.col-sm-12.center
     Contributors:
-    %span.contributors= @contributors
+    %span.contributors= @contributor_names
 
 .row.buffer.thrice.board-update{data: {updaterurl: board_path(@board)}}
   - ['good', 'meh', 'bad'].each do |column_grouping|
     - column_name = @board["#{column_grouping}_column_name"].downcase
-    
+
     .column.col-sm-12.col-md-4{class: column_grouping}
       .row
         .col-sm-12
           %h4.title= column_name.titleize
-    
+
       .row.buffer
         .col-sm-12.center
           %p= @board["#{column_grouping}_column_description"] unless @board["#{column_grouping}_column_description"].blank?
@@ -40,7 +40,7 @@
           %a.btn.btn-default.slidebutton{class: "#{column_grouping}-grad", data: {slideclosest: '.column', slidefind: '.inline-item-form'}} Add Item
           = render partial: 'items/inline_form', locals: {item: @board.items.new(user_name: @last_user_name, column_name: column_name)}
       .row
-        .col-sm-12.items    
+        .col-sm-12.items
           = render @items.for_column(column_name)
 
 
@@ -56,12 +56,12 @@
   .col-sm-12.center.buffer.thrice
     %h5 Sharing
     %p
-      Board Password: 
+      Board Password:
       = @board.password
     %p
       Link with password:
       = link_to(board_url(@board, p: @board.password), board_path(@board, p: @board.password))
-    %p 
+    %p
       Link without password:
       = link_to(board_url(@board), @board)
 
@@ -70,7 +70,7 @@
 .row.buffer.thrice
   .col-sm-12.center.buffer.thrice
     %h4 Instructions
-    %p 
+    %p
       The goal here is to share feedback about what is working, what is not working, and what you are concerned about.
     %p
       This won't work unless everyone is honest with their feedback and that feedback is received well.
@@ -78,8 +78,7 @@
       Simply click the "Add Item" button in each column to add something.
     %p
       If you're not sure what to think about something, add it to the middle column.
-      
+
 .row.buffer.thrice
 .row.buffer.thrice
 .row.buffer.thrice
-      

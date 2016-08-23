@@ -11,16 +11,17 @@ class BoardsController < ApplicationController
   # GET /boards/1.json
   def show
     @last_user_name = cookies.signed[:last_user_name]
-        
+
     items = @board.items
     if items.present?
-      @contributors = (items + items.map(&:comments) + items.map(&:votes)).flatten.map(&:user).uniq.map(&:name).sort.join(', ')  
-    else
-      @contributors = 'None Yet'
+      contributors = (items + items.map(&:comments) + items.map(&:votes)).flatten.map(&:user).uniq.compact
+      @contributor_names = contributors.map(&:name).sort.join(', ') if contributors.present?
     end
-    
+
+    @contributor_names = 'None Yet' if contributors.blank?
+
     respond_to do |format|
-      format.html do 
+      format.html do
         if @board.password.present?
           cookies.signed["board_#{@board.slug}_password"] = params[:p] if params.include?(:p)
           saved_password = params[:p] || cookies.signed["board_#{@board.slug}_password"]
@@ -40,7 +41,7 @@ class BoardsController < ApplicationController
           @items = @board.items.recent
         end
       end
-      format.json do 
+      format.json do
         @time = Time.at( params[:time].to_i / 1000.0 )
         if @board.updated_at < @time
           head :ok
@@ -56,20 +57,20 @@ class BoardsController < ApplicationController
     cookies.signed["board_#{@board.slug}_password"] = params[:password]
     redirect_to @board
   end
-  
+
   # GET /boards/new
   def new
     @group = Group.friendly.find(params[:group_id]) if params.include?(:group_id)
-    
+
     @board = Board.new(
       name: "#{Date.today.strftime('%m/%d/%Y')} Retro",
       password: Board.generate_password,
-      duration: 24, 
-      good_column_name: 'Good', 
-      bad_column_name: 'Bad', 
+      duration: 24,
+      good_column_name: 'Good',
+      bad_column_name: 'Bad',
       meh_column_name: 'Meh',
-      good_column_description: 'What worked well this past week?', 
-      bad_column_description: 'What went badly this past week?', 
+      good_column_description: 'What worked well this past week?',
+      bad_column_description: 'What went badly this past week?',
       meh_column_description: 'What were you concerned about this past week?',
       group_id: params[:group_id]
     )
@@ -78,13 +79,13 @@ class BoardsController < ApplicationController
   # GET /boards/1/edit
   def edit
   end
-  
+
 
   # POST /boards
   # POST /boards.json
   def create
     @board = Board.new(board_params)
-    
+
     respond_to do |format|
       if @board.save
         format.html { redirect_to board_path(@board, p: @board.password), notice: 'Board was successfully created.' }
