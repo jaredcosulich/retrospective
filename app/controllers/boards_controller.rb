@@ -86,6 +86,11 @@ class BoardsController < ApplicationController
   def create
     @board = Board.new(board_params)
 
+    if !verify_recaptcha(model: @board)
+      render :new
+      return
+    end
+
     respond_to do |format|
       if @board.save
         format.html { redirect_to board_path(@board, p: @board.password), notice: 'Board was successfully created.' }

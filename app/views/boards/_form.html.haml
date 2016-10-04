@@ -7,7 +7,7 @@
       %ul
         - @board.errors.full_messages.each do |message|
           %li= message
-          
+
   .field.buffer.twice
     = f.hidden_field :group_id
 
@@ -25,8 +25,8 @@
     = f.label :duration, 'How many hours do you want to keep this open for?'
     %br
       = f.number_field :duration, class: 'center'
-    
-  
+
+
   .advanced
     .field.buffer.thrice
       = f.label :good_column_name, 'Good Column Name'
@@ -57,6 +57,9 @@
       = f.label :bad_column_description, 'Bad Column Description'
       .wide-text
         = f.text_field :bad_column_description, class: 'center'
+
+    .field.buffer.thrice
+      = recaptcha_tags
 
   .actions.buffer.thrice
     = f.submit 'Save', class: 'btn btn-default'

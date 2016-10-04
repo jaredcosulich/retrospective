@@ -46,3 +46,9 @@ gem 'jquery-ui-rails'
 gem 'friendly_id', '~> 5.0.0'
 
 gem 'newrelic_rpm'
+
+gem "recaptcha", require: "recaptcha/rails"
+
+group :development do
+  gem 'figaro'
+end

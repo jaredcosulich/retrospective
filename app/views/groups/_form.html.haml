@@ -7,17 +7,20 @@
       %ul
         - @group.errors.full_messages.each do |message|
           %li= message
-  
+
   .field.buffer.thrice
     = f.label :title
     .wide-text
       = f.text_field :title
-  
+
   .field.buffer.thrice
     = f.label :description
     .wide-text
       = f.text_area :description
-  
+
+  .field.buffer.thrice
+    = recaptcha_tags
+
   .actions.buffer.thrice
     = f.hidden_field :child_group_id
     = f.hidden_field :parent_group_id
